@@ -1,0 +1,60 @@
+<html lang="en">
+<head>
+    <title>client_file</title>
+    <!-- <script type="text/javascript" src="./srv.js"></script> -->
+</head>
+<body>
+    <script type="text/javascript">
+      //  var xhr = new XMLHttpRequest();
+        var dt = ""
+      async function callbck(data)
+      {
+            var temp = dt
+            dt = await data.text()
+            console.log("request sent"+dt);
+
+
+//***************************
+            var parentElement = document.getElementById("mainArea");
+
+            // var childElement2 = document.createElement("div");
+            
+            // parentElement.innerHTML = dt;
+            if(dt != temp){
+                var childElement1 = document.createElement("div");
+                childElement1.innerHTML= dt;
+                parentElement.appendChild(childElement1);
+            }
+            // parentElement.appendChild(childElement2);
+        }
+        
+        function postReq(){
+            fetch("https://chat-orcin-beta.vercel.app/",{
+                method:"POST",
+                credentials:"same-origin",
+                // mode:"no-cors"
+
+            }).then(callbck);
+        }
+
+        setInterval(postReq, 1500)
+        function sendReq(){
+            fetch("https://chat-orcin-beta.vercel.app/?nme="+document.getElementById('nme').value+"&msg="+document.getElementById('msgs').value,{
+                credentials:"same-origin"
+                
+
+            }).then(()=>{});
+        }
+    </script>
+    Name :
+<input type="text" id="nme">
+<br>
+Messege:
+<input type="text" id="msgs">
+<input type="button" value=Enter onclick="sendReq();">
+<br><br>
+<div id="mainArea">
+
+</div>
+</body>
+</html>
