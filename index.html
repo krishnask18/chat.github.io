@@ -1,11 +1,10 @@
 <html lang="en">
 <head>
     <title>स्वतंत्र भारत</title>
-    <!-- <script type="text/javascript" src="./srv.js"></script> -->
 </head>
+    
 <body>
     <script type="text/javascript">
-      //  var xhr = new XMLHttpRequest();
         var dt = ""
       async function callbck(data)
       {
@@ -25,7 +24,7 @@
         }
         
         function postReq(){
-            fetch("https://chat-orcin-beta.vercel.app/?nme="+document.getElementById('nme').value,{
+            fetch("https://chat-orcin-beta.vercel.app/?nme="+document.getElementById('nme').value+"&code="+document.getElementById('code').value,{
                 method:"POST",
                 credentials:"same-origin",
                 // mode:"no-cors"
@@ -35,6 +34,7 @@
         
         function named(){
             document.getElementById("nme").disabled = true;
+            document.getElementById("code").disabled = true;
             document.getElementById("btn1").disabled = true;
             
             var parentElement = document.getElementById("mainArea");
@@ -44,7 +44,8 @@
             // parentElement.innerHTML = dt;
                 var childElement1 = document.createElement("div");
                 childElement1.innerHTML= 
-                    `Messege:
+                    `
+                    Messege:
                     <input type="text" id="msgs">
                     <input type="button" value=Enter onclick="sendReq()" id="btn2">
                     <br><br>`;
@@ -52,7 +53,7 @@
             setInterval(postReq, 300)
         }
         window.onbeforeunload = ()=>{
-            fetch("https://chat-orcin-beta.vercel.app/?nme="+document.getElementById('nme').value,{
+            fetch("https://chat-orcin-beta.vercel.app/?nme="+document.getElementById('nme').value+"&code="+document.getElementById('code').value,{
                     method:"DELETE",
                     credentials:"same-origin",
                     // mode:"no-cors"
@@ -61,7 +62,7 @@
                 console.log(document.getElementById('nme').value+" deleted")
         }
         function sendReq(){
-            fetch("https://chat-orcin-beta.vercel.app/?nme="+document.getElementById('nme').value+"&msg="+document.getElementById('msgs').value,{
+            fetch("https://chat-orcin-beta.vercel.app/?nme="+document.getElementById('nme').value+"&msg="+document.getElementById('msgs').value+"&code="+document.getElementById('code').value,{
                 credentials:"same-origin"
                 
 
@@ -70,10 +71,12 @@
     </script>
     Name :
     <input type="text" id="nme">
+    Enter Code:
+    <input type="text" id="code">
     <input type="button" value="Submit" id="btn1" onclick="named()">
-    <br>
 <div id="mainArea">
 
 </div>
 </body>
+</html>
 </html>
